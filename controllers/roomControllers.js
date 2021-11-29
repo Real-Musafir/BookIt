@@ -1,16 +1,35 @@
 import Room from "../models/room";
 import ErrorHandler from "../utils/errorHandler";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors";
+import APIFeatures from "../utils/apiFeatures"
+
 
 // Get all rooms    =>    /api/rooms
 const allRooms = catchAsyncErrors(async (req, res) => {
-  const rooms = await Room.find();
-  res.status(200).json({
-    success: true,
-    count: rooms.length,
-    rooms,
-  });
-});
+
+    const resPerPage = 4;
+
+    const roomsCount = await Room.countDocuments();
+
+    const apiFeatures =  new APIFeatures(Room.find(), req.query)
+        .search()
+        .filter()
+
+    let rooms = await apiFeatures.query;
+    let filteredRoomsCount = rooms.length;
+
+    apiFeatures.pagination(resPerPage)
+
+    res.status(200).json({
+        success: true,
+        roomsCount,
+        resPerPage,
+        filteredRoomsCount,
+        rooms
+    })
+
+})
+
 
 // Create new room    =>    /api/rooms
 const newRoom = catchAsyncErrors(async (req, res) => {
@@ -20,6 +39,7 @@ const newRoom = catchAsyncErrors(async (req, res) => {
     room,
   });
 });
+
 
 // Get rooom details    =>    /api/room/:id
 const getSingleRoom = catchAsyncErrors(async (req, res, next) => {
@@ -34,6 +54,7 @@ const getSingleRoom = catchAsyncErrors(async (req, res, next) => {
     room,
   });
 });
+
 
 // Update rooom details    =>    /api/room/:id
 const updateRoom = catchAsyncErrors(async (req, res, next) => {
@@ -54,6 +75,7 @@ const updateRoom = catchAsyncErrors(async (req, res, next) => {
     room,
   });
 });
+
 
 // Delete a single room  =>    /api/room/:id
 const deleteRoom = catchAsyncErrors(async (req, res, next) => {
