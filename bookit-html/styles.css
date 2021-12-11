@@ -96,7 +96,7 @@ body {
   height: 16px;
 }
 .lds-dual-ring:after {
-  content: " ";
+  content: ' ';
   display: block;
   width: 24px;
   height: 24px;
@@ -291,7 +291,7 @@ nav {
 }
 
 .rating-outer::before {
-  content: "\f006 \f006 \f006 \f006 \f006";
+  content: '\f006 \f006 \f006 \f006 \f006';
 }
 
 .rating-inner {
@@ -304,7 +304,7 @@ nav {
 }
 
 .rating-inner::before {
-  content: "\f005 \f005 \f005 \f005 \f005";
+  content: '\f005 \f005 \f005 \f005 \f005';
   color: #e61e4d;
 }
 
@@ -417,7 +417,7 @@ footer {
   max-width: 500px;
   padding: 10px 14px;
   font-size: 1em;
-  font-family: "Source Code Pro", monospace;
+  font-family: 'Source Code Pro', monospace;
   box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,
     rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
   border: 0;
